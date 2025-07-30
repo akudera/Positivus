@@ -1,0 +1,17 @@
+@mixin fluid-text($min, $max) {
+	font-size: clamp(#{$min}px, #{calc($max / 1280 * 100)}vw, #{$max}px);
+}
+
+@mixin hover {
+	@media (hover: hover) and (pointer: fine) {
+		&:hover {
+			@content;
+		}
+	}
+
+	@media (hover: none), (pointer: coarse) {
+		&:active {
+			@content;
+		}
+	}
+}

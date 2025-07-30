@@ -1,0 +1,203 @@
+@use "../mixins.scss" as *;
+
+.review {
+	&__header {
+		display: flex;
+		align-items: center;
+		gap: 30px 40px;
+	}
+	&__title {
+		@include fluid-text(36, 40);
+		font-family: "SpaceGrotesk-Medium", sans-serif;
+		background-color: var(--color-primary);
+		padding-inline: 7px;
+		border-radius: var(--border-radius);
+	}
+	&__description {
+		@include fluid-text(16, 18);
+		max-width: 475px;
+	}
+
+	&__content {
+		overflow: hidden;
+		margin-top: 80px;
+		background-color: var(--color-alternate);
+		border-radius: var(--border-radius-section);
+		padding-block: 84px 70px;
+	}
+
+	&__list {
+		overflow: hidden;
+		display: flex;
+		column-gap: 50px;
+		color: var(--color-text-alternate);
+	}
+
+	&__card {
+		--max-width: 606px;
+		--margin: calc(50% - var(--max-width) / 2);
+		flex-shrink: 0;
+		max-width: var(--max-width);
+
+		&:nth-child(1) {
+			margin-left: var(--margin);
+		}
+
+		&:last-child {
+			margin-right: var(--margin);
+		}
+
+		&-quote {
+			position: relative;
+			border-radius: var(--border-radius-section);
+			border: var(--border);
+			padding: 48px 52px;
+			max-height: 390px;
+
+			&::before {
+				content: "";
+				position: absolute;
+				rotate: 45deg;
+				top: 100%;
+				translate: 0 -50%;
+				left: 52px;
+				width: 7.47%;
+				aspect-ratio: 1;
+				border-bottom: var(--border);
+				border-right: var(--border);
+				background-color: var(--color-alternate);
+			}
+
+			& p {
+				@include fluid-text(16, 18);
+				max-height: 290px;
+				overflow-y: auto;
+				scrollbar-width: thin;
+				scrollbar-color: var(--color-primary) transparent;
+			}
+		}
+
+		&-footer {
+			margin-top: 45px;
+			margin-left: calc(45px + 7.47% / 2);
+		}
+
+		&-author {
+			@include fluid-text(18, 20);
+			color: var(--color-primary);
+			font-weight: 500;
+		}
+
+		&-company {
+			@include fluid-text(16, 18);
+		}
+	}
+
+	&__controllers {
+		justify-self: center;
+		display: flex;
+		max-width: 644px;
+		width: 100%;
+		justify-content: space-between;
+		column-gap: 30px;
+		margin-top: 120px;
+		padding-inline: 30px;
+
+		&-button {
+			width: 20px;
+			padding: 0;
+			border: 0;
+			background-color: transparent;
+			color: var(--color-text-alternate);
+
+			&:not(.inactive):hover {
+				@include hover {
+					color: var(--color-text-hover);
+				}
+			}
+
+			&.inactive {
+				color: var(--color-disabled);
+				cursor: default;
+			}
+		}
+	}
+
+	&__pagination {
+		display: flex;
+		column-gap: 18px;
+
+		&-list {
+			display: contents;
+		}
+
+		&-item {
+			display: inline-flex;
+			width: 22px;
+			aspect-ratio: 1;
+
+			& button {
+				padding: 0;
+				background-color: transparent;
+				border: none;
+				width: 100%;
+				color: var(--color-text-alternate);
+				padding-inline: 4px;
+
+				&.selected {
+					cursor: default;
+					color: var(--color-primary);
+				}
+
+				&:not(.selected):hover {
+					@include hover {
+						color: var(--color-text-hover);
+					}
+				}
+
+				& svg,
+				& path {
+					pointer-events: none;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 870px) {
+	.review__card {
+		--max-width: 490px;
+	}
+}
+
+@media (max-width: 790px) {
+	.review {
+		&__header {
+			flex-direction: column;
+		}
+
+		&__content {
+			margin-top: 40px;
+			padding-block: 30px 60px;
+		}
+
+		&__list {
+			column-gap: 30px;
+		}
+
+		&__controllers {
+			margin-top: 40px;
+		}
+	}
+}
+
+@media (max-width: 650px) {
+	.review__card {
+		--max-width: 330px;
+		--margin: 30px;
+	}
+
+	.review__pagination {
+		column-gap: 12px;
+	}
+}
